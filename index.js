@@ -75,7 +75,7 @@ server.get('/api/projects', async (req, res) => {
 // displaying actions by project
   server.get("api/projects/:id/actions", async (req, res) => {
     try {
-      const actions = await db("actions").where({ cohort_id: req.params.id });
+      const actions = await db("actions").where({ project_id: req.params.id });
       res.status(200).json(actions);
     } catch (error) {
       res.status(500).json(error);
@@ -102,7 +102,7 @@ server.get('/api/actions', async (req, res) => {
   }
 });
 
-// list a project by id
+// list a action by id
 server.get('/api/actions/:id', async (req, res) => {
   // get the actions from the database
   try {
@@ -114,10 +114,6 @@ server.get('/api/actions/:id', async (req, res) => {
     res.status(500).json(error);
   }
 });
-
-const errors = {
-  '19': 'Another record with that value exists',
-};
 
 // create actions
 server.post('/api/actions', async (req, res) => {
@@ -152,7 +148,6 @@ server.put('/api/actions/:id', async (req, res) => {
     }
   } catch (error) {}
 });
-
 
 
 const port = process.env.PORT || 2000;
