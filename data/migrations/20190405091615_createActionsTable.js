@@ -2,10 +2,15 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable('actions', tbl => {
       tbl.increments();
   
-      tbl.string('name', 128)
-          .notNullable()
-          .unique();
-      tbl.timestamp(true, true);
+      tbl
+      .integer("projects_id")
+      .unsigned()
+      .references("id")
+      .inTable("projects")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
+
+    tbl.timestamps(true, true)
     });
   };
   

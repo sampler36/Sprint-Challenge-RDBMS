@@ -22,7 +22,7 @@ server.get('/api/projects', async (req, res) => {
     }
   });
   
-  // list a role by id
+  // list a project by id
   server.get('/api/projects/:id', async (req, res) => {
     // get the projects from the database
     try {
