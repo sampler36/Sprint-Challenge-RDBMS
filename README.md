@@ -80,6 +80,18 @@ Feel free to name the tables and fields anything you want. **Add relationships**
   - [ ] POST for adding actions.
   - [ ] GET for retrieving a `project` by its `id` that returns an object with the following structure:
 
+  select p.id, p.name, p.description,
+   from projects as p 
+  where project.id = project.action.id
+
+  server.get('/api/projects/:id/actions)
+       
+       const db =  get project by id // 
+                   get actions form thee ided project//
+                   
+                    
+
+
     ```js
     {
       id: 1,
