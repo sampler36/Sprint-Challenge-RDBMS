@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
           .unique();
       tbl.timestamp(true, true);
     });
+
   };
   
   exports.down = function(knex, Promise) {
