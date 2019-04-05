@@ -72,7 +72,15 @@ server.get('/api/projects', async (req, res) => {
       }
     } catch (error) {}
   });
-
+  
+  server.get("api/projects/:id/actions", async (req, res) => {
+    try {
+      const students = await db("actions").where({ cohort_id: req.params.id });
+      res.status(200).json(students);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
 //****** */
 // Actions//
 server.get('/api/actions', async (req, res) => {
