@@ -1,8 +1,14 @@
-
 exports.up = function(knex, Promise) {
+    return knex.schema.createTable('projects', tbl => {
+      tbl.increments();
   
-};
-
-exports.down = function(knex, Promise) {
+      tbl.string('name', 128)
+          .notNullable()
+          .unique();
+      tbl.timestamp(true, true);
+    });
+  };
   
-};
+  exports.down = function(knex, Promise) {
+    return knex.schema.dropTableIfExists('projects');
+  };
