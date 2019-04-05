@@ -1,0 +1,30 @@
+{
+  "name": "rdbms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon",
+    "initdb": "knex init",
+    "table1": "knex migrate:make createProjectsTable",
+    "table2": "knex migrate:make createActionsTable",
+    "migrate": "knex migrate:latest",
+    "seed1": "knex seed:make 01-projects",
+    "seed2": "knex seed:make 02-actions",
+    "runseed1": "knex seed:run 01-projects",
+    "runseed2": "knex seed:run 02-actions",
+    "seed": "knex seed:run",
+    "rollback": "knex migrate:rollback"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "init": "^0.1.2",
+    "knex": "^0.16.3",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "knex-cleaner": "^1.1.4",
+    "nodemon": "^1.18.10"
+  }
+}
