@@ -26,10 +26,10 @@ server.get('/api/projects', async (req, res) => {
   server.get('/api/projects/:id', async (req, res) => {
     // get the projects from the database
     try {
-      const role = await db('projects')
+      const project = await db('projects')
         .where({ id: req.params.id })
         .first();
-      res.status(200).json(role);
+      res.status(200).json(project);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -44,11 +44,11 @@ server.get('/api/projects', async (req, res) => {
     try {
       const [id] = await db('projects').insert(req.body);
   
-      const role = await db('projects')
+      const project = await db('projects')
         .where({ id })
         .first();
   
-      res.status(201).json(role);
+      res.status(201).json(project);
     } catch (error) {
       const message = errors[error.errno] || 'We ran into an error';
       res.status(500).json({ message, error });
@@ -62,21 +62,26 @@ server.get('/api/projects', async (req, res) => {
         .update(req.body);
   
       if (count > 0) {
-        const role = await db('projects')
+        const project = await db('projects')
           .where({ id: req.params.id })
           .first();
   
-        res.status(200).json(role);
+        res.status(200).json(project);
       } else {
         res.status(404).json({ message: 'Records not found' });
       }
     } catch (error) {}
   });
 // displaying actions by project
-  server.get("api/projects/:id/actions", async (req, res) => {
+  server.get("/api/projects/:id/actions", async (req, res) => {
     try {
-      const actions = await db("actions").where({ project_id: req.params.id });
-      res.status(200).json(actions);
+      const project = await db('projects')
+      .where({ id: req.params.id })
+      const actions = await db("actions")
+      .where({ project_id: req.params.id })
+      .first();
+      const kk = {project, actions}
+      res.status(200).json(kk);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -106,10 +111,10 @@ server.get('/api/actions', async (req, res) => {
 server.get('/api/actions/:id', async (req, res) => {
   // get the actions from the database
   try {
-    const role = await db('actions')
+    const project = await db('actions')
       .where({ id: req.params.id })
       .first();
-    res.status(200).json(role);
+    res.status(200).json(project);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -120,11 +125,11 @@ server.post('/api/actions', async (req, res) => {
   try {
     const [id] = await db('actions').insert(req.body);
 
-    const role = await db('actions')
+    const action = await db('actions')
       .where({ id })
       .first();
 
-    res.status(201).json(role);
+    res.status(201).json(action);
   } catch (error) {
     const message = errors[error.errno] || 'We ran into an error';
     res.status(500).json({ message, error });
@@ -138,11 +143,11 @@ server.put('/api/actions/:id', async (req, res) => {
       .update(req.body);
 
     if (count > 0) {
-      const role = await db('actions')
+      const project = await db('actions')
         .where({ id: req.params.id })
         .first();
 
-      res.status(200).json(role);
+      res.status(200).json(project);
     } else {
       res.status(404).json({ message: 'Records not found' });
     }

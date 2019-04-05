@@ -3,6 +3,8 @@ exports.up = function(knex, Promise) {
       tbl.increments();
       tbl.string('name',128)
          .notNullable();
+      tbl.string('description',520)
+         .notNullable();
   
       tbl
       .integer("project_id")
